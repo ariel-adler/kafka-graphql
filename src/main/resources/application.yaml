@@ -1,0 +1,60 @@
+spring:
+#  application:
+#    name: graphql-todo-app
+  servlet:
+    multipart:
+      enabled: true
+      location: /tmp
+  main:
+    allow-bean-definition-overriding: true
+#server:
+#  port: 9000
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+graphql:
+  servlet:
+    enabled: true
+    mapping: /graphql
+    cors-enabled: false
+    cors:
+      allowed-origins: http://some.domain.com
+      allowed-methods: GET, HEAD, POST
+    exception-handlers-enabled: true
+    context-setting: PER_REQUEST_WITH_INSTRUMENTATION
+    async-mode-enabled: true
+    actuator-metrics: true
+    async-timeout: 1000
+  playground:
+    enabled: true
+    cdn:
+      enabled: false
+      version: latest
+  altair:
+    enabled: true
+    cdn:
+      enabled: false
+      version: 4.0.2
+    options:
+      initial-settings:
+        theme: dracula
+      endpoint-url: /graphql
+
+  graphiql:
+    enabled: true
+    cdn:
+      enabled: false
+      version: 0.17.5
+    headers:
+      Test: TestHeader
+    props:
+      variables:
+        headerEditorEnabled: true
+        headers: '{ "Authorization": "SomeValue" }'
+  voyager:
+    enabled: true
+    cdn:
+      enabled: true
+      version: 1.0.0-rc.31
